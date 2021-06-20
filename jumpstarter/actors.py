@@ -192,7 +192,7 @@ class Actor:
         cls,
         *,
         dependencies: typing.Iterable[type] = None,
-        actor_state: ActorState | None = ActorState,
+        actor_state: type[ActorState] | None = ActorState,
     ):
         cls.actor_state = actor_state
 
@@ -218,7 +218,7 @@ class Actor:
                     f"{invalid_dependencies_str}"
                 )
 
-            dependencies: set[type] = {
+            dependencies: set[type[Actor]] = {
                 dep
                 for dep in dependencies
                 if ancestors(cls.__dependency_graph, dep).isdisjoint(dependencies)
